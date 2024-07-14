@@ -199,6 +199,7 @@ section.academic{
     width: 90%;
     padding: 40px;
     margin: 10px;
+    box-sizing: border-box;
 }
 
 .academic__courses{
