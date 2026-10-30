@@ -151,7 +151,13 @@ h1.title_sobre_mi, h2.title__bio, h3.title__subsection{
 
 div.title__network{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    gap: 40px;
+}
+
+div.title__network ul{
+    margin: 0;
+    padding: 0;
 }
 
 .title__network__item__img{
@@ -701,6 +707,7 @@ h2.title__bio, h3.title__subsection{
 div.title__network{
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
 }
 
 /*Sección sobre mi*/
