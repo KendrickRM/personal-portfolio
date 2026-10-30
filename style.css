@@ -100,11 +100,21 @@ a:hover{
 }
 /*Sección Title */
 
+section.title{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+div.title__photo{
+    flex-shrink: 0;
+}
+
 div.title__div{
     display: flex;
     background: linear-gradient(55deg, var(--gray) 60%, var(--red));
     border-radius: 500px;
-    width: 90%;
+    width: 100%;
     margin: 60px 0;
     align-items: center;
 }
@@ -118,7 +128,7 @@ div.title__container{
 }
 
 h1.title_sobre_mi{
-    margin-left: 3%;
+    margin-left: 0;
     font-size: 20px;
 }
 
@@ -131,6 +141,7 @@ h1.title_sobre_mi, h2.title__bio, h3.title__subsection{
     display: flex;
     height: 320px;
     width: auto;
+    max-width: none;
     flex-shrink: 0;
     margin: 0 20px 0 60px;
 }
@@ -168,6 +179,27 @@ section.skills{
     margin: 10px;
     background: linear-gradient(45deg, var(--gray) 60%, var(--red));
     border-radius: 500px;
+}
+
+.skills__box, .hobbies__box{
+    text-align: center;
+}
+
+.skills__box{
+    width: 110px;
+}
+
+.skills__box ul, .hobbies__img__list{
+    padding: 0;
+    margin: 0;
+}
+
+.hobbies__box{
+    width: 130px;
+}
+
+.about__paragraph, .about__paragraph_experience{
+    line-height: 1.6;
 }
 
 .skills__title{
@@ -228,6 +260,25 @@ section.academic{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 30px 20px;
+}
+
+.academic__courses__box{
+    flex: 1 1 220px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.academic__courses__list{
+    padding: 0;
+    margin: 0;
+}
+
+.academic__courses__item__img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 152px;
 }
 /* experiencia*/
 
@@ -313,11 +364,13 @@ section.formcontato{
 div.formcontato__text{
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 
 a.formcontato__whatsapp{
     display: inline-flex;
+    align-self: flex-start;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -333,10 +386,19 @@ a.formcontato__whatsapp img{
 .formcontato__form{
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+}
+
+.formcontato__textarea{
+    width: 100%;
+    font-size: 14px;
+    resize: vertical;
 }
 
 .formcontato__input{
-    width: 250px;
+    width: 100%;
+    font-size: 14px;
     padding: 10px 12px;
     border: 1px solid var(--red);
     font-family: inherit;
@@ -394,8 +456,11 @@ section.footer{
 }
 
 /*title*/
-div.title__div{
+section.title{
     width: 94%;
+}
+
+div.title__div{
     margin: 30px 0;
     border-radius: 200px;
 }
@@ -481,14 +546,14 @@ nav{
 ul.menu__list{
     flex-wrap: wrap;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
     margin: 0;
-    padding: 0 8px;
+    padding: 0 6px;
 }
 
 .menu__list__item a{
-    padding: 6px 10px;
-    font-size: 11px;
+    padding: 6px 8px;
+    font-size: 10px;
 }
 
 /*Titulo*/
@@ -496,7 +561,7 @@ section.title{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 92%;
 }
 
 div.title__div{
@@ -504,7 +569,7 @@ div.title__div{
     align-items: center;
     text-align: center;
     border-radius: 60px;
-    width: 92%;
+    width: 100%;
     margin: 15px 0;
     padding: 20px 0 0;
     background: linear-gradient(160deg, var(--gray) 60%, var(--red));
@@ -592,19 +657,47 @@ div.hobbies__line{
     margin-right: 0;
 }
 
-.hobbies__img{
-    width: 40px;
-    height: 40px;
-    align-items: center;
+.hobbies__box{
+    flex: 0 0 33%;
+    display: flex;
+    justify-content: center;
 }
 
 .hobbies__img__list{
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.hobbies__img{
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.hobbies__img img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.hobbies__name{
+    font-size: 13px;
+    line-height: 1.2;
 }
 
 /*Formación Académica*/
 section.academic{
     padding: 20px 10px;
+}
+
+.about__title, .academic__title, .experience__section__title{
+    text-align: center;
 }
 
 /*Experiencia Profesional*/
@@ -660,9 +753,12 @@ div.formcontato__text{
     text-align: center;
 }
 
-.formcontato__input, .formcontato__textarea{
-    width: 100%;
-    max-width: 250px;
+.formcontato__form{
+    max-width: 300px;
+}
+
+a.formcontato__whatsapp{
+    align-self: center;
 }
 
 }
