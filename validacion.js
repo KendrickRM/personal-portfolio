@@ -1,95 +1,50 @@
 const formContacto = document.getElementById("contacto");
-const inputs = document.querySelectorAll("#contacto input");
-const mensaje = document.getElementById("mensaje");
 const botonEnviar = document.getElementById("botonEnviar");
 
+// Cada campo: su regla de validación y el span donde se muestra el error
+const campos = {
+    nombre: { el: document.getElementById("nombre"), error: document.getElementById("errorNombre"), valido: (v) => /^[a-zA-ZÀ-ÿ\s'.-]{1,50}$/.test(v) },
+    email: { el: document.getElementById("email"), error: document.getElementById("errorEmail"), valido: (v) => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v) },
+    asunto: { el: document.getElementById("asunto"), error: document.getElementById("errorAsunto"), valido: (v) => v.length >= 1 && v.length <= 50 },
+    mensaje: { el: document.getElementById("mensaje"), error: document.getElementById("errorMensaje"), valido: (v) => v.length >= 10 && v.length <= 300 },
+};
 
-const expresiones = {
-	nombre: /^[a-zA-ZÀ-ÿ0-9\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
-	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-	asunto: /^[a-zA-ZÀ-ÿ0-9\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
-    mensaje: /^[a-zA-ZÀ-ÿ0-9\s]{10,300}$/, // Letras y espacios, pueden llevar acentos.
-}
+const esValido = (campo) => campo.valido(campo.el.value.trim());
 
+// Pinta de verde/rojo solo el campo que se está editando y muestra u oculta su error
+const marcarCampo = (campo) => {
+    const valido = esValido(campo);
+    campo.el.style.borderColor = valido ? "green" : "red";
+    campo.error.style.display = valido ? "none" : "block";
+};
 
-const validarFormulario = (e) => {
+// El botón solo se habilita cuando todos los campos son válidos
+const actualizarBoton = () => {
+    botonEnviar.disabled = !Object.values(campos).every(esValido);
+};
 
-    let nombreValido = expresiones.nombre.test(inputs[0].value.trim());
-    let emailValido = expresiones.email.test(inputs[1].value.trim());
-    let asuntoValido = expresiones.asunto.test(inputs[2].value.trim());
-    let mensajeValido = expresiones.mensaje.test(mensaje.value.trim());
-
-    if (nombreValido && emailValido && asuntoValido && mensajeValido) {
-        botonEnviar.disabled = false; // Habilita el botón si todos los campos son válidos
-    } else {
-        botonEnviar.disabled = true; // Deshabilita el botón si algún campo no es válido
-    }
-
-        if (mensaje.name === "mensaje"){
-            if(expresiones.mensaje.test(mensaje.value)) {
-                 mensaje.style.borderColor = 'green';
-                 errorMensaje.style.display = 'none';
-                 return true; // El recuadro se pone verde de estar ingresado de manera correcta la informacion
-            } else {
-                mensaje.style.borderColor = 'red';
-                errorMensaje.style.display = 'block'; // El recuadro se pone rojo y muestra cual es el error de estar ingresado de manera incorrecta la informacion
-            }
-    }
-    
-    switch (e.target.name) {
-       case "nombre":
-            if(nombreValido) {
-                 e.target.style.borderColor = 'green';
-                 errorNombre.style.display = 'none';
-                 return true; // El recuadro se pone verde de estar ingresado de manera correcta la informacion
-            } else {
-                e.target.style.borderColor = 'red';
-                errorNombre.style.display = 'block'; // El recuadro se pone rojo y muestra cual es el error de estar ingresado de manera incorrecta la informacion
-            }
-       break;
-       case "email":
-            if (emailValido) {
-                e.target.style.borderColor = 'green';
-                errorEmail.style.display = 'none';
-                return true; // El recuadro se pone verde de estar ingresado de manera correcta la informacion
-            } else {
-                e.target.style.borderColor = 'red';
-                errorEmail.style.display = 'block'; // El recuadro se pone rojo y muestra cual es el error de estar ingresado de manera incorrecta la informacion
-            }
-       break;
-       case "asunto":
-            if(asuntoValido) {
-                e.target.style.borderColor = 'green';
-                errorAsunto.style.display = 'none';
-                return true; // El recuadro se pone verde de estar ingresado de manera correcta la informacion
-            } else {
-                e.target.style.borderColor = 'red';
-                errorAsunto.style.display = 'block'; // El recuadro se pone rojo y muestra cual es el error de estar ingresado de manera incorrecta la informacion
-            }
-       break;
-    }
-}
-
-inputs.forEach((input) => {
-    input.addEventListener('keyup',validarFormulario)
-    input.addEventListener('blur',validarFormulario)
-
-
-});
-
-mensaje.addEventListener('keyup',validarFormulario)
-mensaje.addEventListener('blur',validarFormulario)
-
-formContacto.addEventListener("submit", (e) => {
-    e.preventDefault();
-    limpiarForm();
-    alert("Su formulario de contacto ha sido enviado");
-    
+Object.values(campos).forEach((campo) => {
+    ["keyup", "blur"].forEach((evento) => {
+        campo.el.addEventListener(evento, () => {
+            marcarCampo(campo);
+            actualizarBoton();
+        });
+    });
 });
 
 const limpiarForm = () => {
-    document.querySelector("#nombre").value = "";
-    document.querySelector("#email").value = "";
-    document.querySelector("#asunto").value = "";
-    document.querySelector("#mensaje").value = "";
-}
+    Object.values(campos).forEach((campo) => {
+        campo.el.value = "";
+        campo.el.style.borderColor = "";
+        campo.error.style.display = "none";
+    });
+    botonEnviar.disabled = true;
+};
+
+formContacto.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const cuerpo = `Nombre: ${campos.nombre.el.value.trim()}\nCorreo: ${campos.email.el.value.trim()}\n\n${campos.mensaje.el.value.trim()}`;
+    // Abre el cliente de correo del visitante con el mensaje ya redactado
+    window.location.href = `mailto:kendri354@gmail.com?subject=${encodeURIComponent(campos.asunto.el.value.trim())}&body=${encodeURIComponent(cuerpo)}`;
+    limpiarForm();
+});
