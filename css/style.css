@@ -50,6 +50,7 @@ a{
 }
 
 .menu__title{
+    font-weight: bold;
     font-size: 30px;
     display: inline-flex;
 }
@@ -487,6 +488,12 @@ a.formcontato__whatsapp img{
     resize: vertical;
 }
 
+.formcontato__subtext{
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
 .formcontato__input{
     width: 100%;
     font-size: 14px;
@@ -626,7 +633,7 @@ section.formcontato{
     text-align: center;
 }
 
-h3.menu__title{
+.menu__title{
     font-size: 20px;
     margin: 4px 0 8px;
 }
@@ -897,4 +904,15 @@ div.experience__description{
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+}
+
+/*Accesibilidad: respeta a quienes desactivan las animaciones*/
+@media (prefers-reduced-motion: reduce) {
+    html{
+        scroll-behavior: auto;
+    }
+
+    .carousel__track, .carousel__dot{
+        transition: none;
+    }
 }
