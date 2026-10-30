@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Referencia de la hoja de estilo de Css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
@@ -14,12 +14,11 @@
     <title>Kendrick Rocha Portafolio</title>
 </head>
 <body>
-    <!-- Sección del Menú  -->
-    <div class="tudo">
-    <section class="menu">
-        <header class="menu__header">
+    <!-- Menú de navegación (fijo arriba, siempre por encima del contenido) -->
+    <header class="menu">
+        <div class="menu__header">
             <h3 class="menu__title">Kendrick RM</h3>
-        </header>
+        </div>
         <nav>
             <ul class="menu__list">
                 <li class="menu__list__item"><a href="#skills">Skills</a></li>
@@ -29,7 +28,10 @@
                 <li class="menu__list__item"><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
-    </section>
+    </header>
+
+    <!-- Contenido principal: cada sección es un bloque independiente -->
+    <main class="tudo">
 
     <!-- Sección del Header/Title/Hero -->
     <section class="title">
@@ -193,20 +195,44 @@
     <!-- Sección de Experiencia Profesional/Proyectos-->
     <section class="experience" id="xp">
         <h2 class="experience__section__title" >Experiencia Profesional</h2>
-        <div class="experience__box">
-            <!-- Pon el logotipo/captura de pantalla de tu proyecto -->
-            <img class="experience__img" src="assets/secretcode_print.png" alt="Captura del proyecto Encriptador de texto">
-            <div class="experience__info-container">
-                <h2 class="experience__title">Encriptador de texto</h2>
-                <h3 class="experience__text">Challenge Alura </h3>
-                <p class="about__paragraph_experience"> Este proyecto consistió en diseñar e implementar una aplicación web capaz de encriptar y desencriptar mensajes, utilizando técnicas específicas de codificación para asegurar que el texto original pudiera ser transformado y luego recuperado sin alteraciones.</p>
-                    <div class="experience__description">
-                            <!-- Enlaces del proyecto: repositorio y demo -->
-                            <a class="experience__btn experience__btn--repo" href="https://github.com/KendrickRM/alura-s-encryptor" target="_blank" rel="noopener noreferrer">Repositorio</a>
-                            <a class="experience__btn experience__btn--demo" href="https://kendrickrm.github.io/alura-s-encryptor/" target="_blank" rel="noopener noreferrer">Ver demo</a>
-                    </div>
+        <div class="carousel" aria-roledescription="carrusel" aria-label="Proyectos">
+            <div class="carousel__viewport">
+                <div class="carousel__track">
+                    <!-- Proyecto 1 -->
+                    <article class="carousel__slide experience__box" aria-roledescription="diapositiva" aria-label="1 de 2">
+                        <img class="experience__img" src="assets/secretcode_print.png" alt="Captura del proyecto Encriptador de texto">
+                        <div class="experience__info-container">
+                            <h2 class="experience__title">Encriptador de texto</h2>
+                            <h3 class="experience__text">Challenge Alura - 2024</h3>
+                            <p class="about__paragraph_experience">Este proyecto consistió en diseñar e implementar una aplicación web capaz de encriptar y desencriptar mensajes, utilizando técnicas específicas de codificación para asegurar que el texto original pudiera ser transformado y luego recuperado sin alteraciones.</p>
+                            <div class="experience__description">
+                                <a class="experience__btn experience__btn--repo" href="https://github.com/KendrickRM/alura-s-encryptor" target="_blank" rel="noopener noreferrer">Repositorio</a>
+                                <a class="experience__btn experience__btn--demo" href="https://kendrickrm.github.io/alura-s-encryptor/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 2 -->
+                    <article class="carousel__slide experience__box" aria-roledescription="diapositiva" aria-label="2 de 2">
+                        <img class="experience__img experience__img--logo" src="assets/cpp_logo.png" alt="Logotipo de C++">
+                        <div class="experience__info-container">
+                            <h2 class="experience__title">Sistema de correos</h2>
+                            <h3 class="experience__text">Proyecto TicoPacks - 2026</h3>
+                            <p class="about__paragraph_experience">Proyecto grupal de 3 personas en C++ destinado a demostrar el dominio de los principios básicos de la Programación Orientada a Objetos al crear todo un sistema de correos con sus bodegas, clientes, paquetes y demás, los cuales debían comunicarse correctamente y demostrar la correcta relación entre clases.</p>
+                            <div class="experience__description">
+                                <a class="experience__btn experience__btn--repo" href="https://github.com/KendrickRM/Proyecto-II-Progra-I" target="_blank" rel="noopener noreferrer">Repositorio</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
-        </div>   
+
+            <div class="carousel__controls">
+                <button type="button" class="carousel__arrow carousel__arrow--prev" aria-label="Proyecto anterior">&#10094;</button>
+                <div class="carousel__dots"></div>
+                <button type="button" class="carousel__arrow carousel__arrow--next" aria-label="Proyecto siguiente">&#10095;</button>
+            </div>
+        </div>
     </section>
         <!-- Sección de Contacto -->
     <section class="formcontato" id="contacto">
@@ -231,15 +257,18 @@
         </div>
     </section>
 
-        <!-- Sección de Footer -->
-    <section class="footer">
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer__rodape">
             <p>Kendrick B. Rocha Martínez</p>
             <p>2026</p>
         </div>
-    </section>
-    </div>
- <!-- Script del documento JavaScript -->
-<script src="validacion.js"></script>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/validacion.js"></script>
+    <script src="js/carrusel.js"></script>
 </body>
 </html>
